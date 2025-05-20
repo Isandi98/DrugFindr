@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrugFindr - Innovación en Nomenclatura Farmacéutica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <style>
+        :root {
+            --primary: #0052CC;
+            --secondary: #007BFF;
+            --accent: #00C4E1;
+            --warning: #FFAB00;
+            --dark: #343A40;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F8FAFC;
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #E0F2FE 0%, #F8FAFC 100%);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .feature-icon {
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+            background: rgba(0, 82, 204, 0.1);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(0, 82, 204, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+
+        .process-step::after {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 0 4px rgba(0, 82, 204, 0.2);
+        }
+
+        .impact-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .impact-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @media (max-width: 768px) {
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg">
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white py-24">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6" data-aos="fade-up">DrugFindr</h1>
+                <p class="text-xl md:text-2xl opacity-90" data-aos="fade-up" data-aos-delay="200">Revolucionando la Generación y Validación de Nombres Farmacéuticos en Europa</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-16">
+        <!-- Challenge Section -->
+        <section class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">El Desafío: Nombrar Medicamentos en Europa</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card p-8" data-aos="fade-right">
+                    <div class="feature-icon mx-auto floating">
+                        <span class="text-3xl">⚠️</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-center">Alto Riesgo, Alto Impacto</h3>
+                    <p class="text-gray-600 mb-6">Los errores de medicación debido a nombres parecidos (LASA) tienen consecuencias graves. La seguridad del paciente es primordial.</p>
+                    <div class="stat-card">
+                        <div class="stat-number">¡Impacto Crítico!</div>
+                        <p class="text-gray-500">Un nombre incorrecto puede ser fatal</p>
+                    </div>
+                </div>
+                <div class="card p-8" data-aos="fade-left">
+                    <div class="feature-icon mx-auto floating">
+                        <span class="text-3xl">🌍</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-center">Panorama Complejo</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-primary mr-2">•</span>
+                            <div>
+                                <strong class="block">Espacio Nominal Reducido</strong>
+                                <p class="text-gray-600">Miles de medicamentos existentes dificultan encontrar nombres únicos</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-primary mr-2">•</span>
+                            <div>
+                                <strong class="block">Laberinto Regulatorio (EMA)</strong>
+                                <p class="text-gray-600">Criterios estrictos y evaluaciones exhaustivas</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-primary mr-2">•</span>
+                            <div>
+                                <strong class="block">Globalización</strong>
+                                <p class="text-gray-600">Diferencias lingüísticas y culturales</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution Section -->
+        <section class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">La Solución DrugFindr</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon mx-auto">
+                        <span class="text-3xl">🔊</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Análisis Fonético Inteligente</h3>
+                    <p class="text-gray-600">Detección avanzada de similitudes usando principios farmacéuticos</p>
+                </div>
+                <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon mx-auto">
+                        <span class="text-3xl">👁️</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Comprobación Ortográfica</h3>
+                    <p class="text-gray-600">Sistema multimétrico adaptativo para patrones visuales</p>
+                </div>
+                <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon mx-auto">
+                        <span class="text-3xl">💡</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">IA Generativa</h3>
+                    <p class="text-gray-600">Creación de nombres viables con modelos de lenguaje avanzados</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-aos="fade-up">¿Cómo Funciona?</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="process-step" data-aos="fade-right">
+                    <h3 class="text-xl font-semibold mb-2">1. Entrada de Datos</h3>
+                    <p class="text-gray-600">Especificación de prefijos, longitud y cantidad de nombres requeridos</p>
+                </div>
+                <div class="process-step" data-aos="fade-right" data-aos-delay="100">
+                    <h3 class="text-xl font-semibold mb-2">2. Generación/Comparación</h3>
+                    <p class="text-gray-600">IA crea nombres o evalúa los existentes</p>
+                </div>
+                <div class="process-step" data-aos="fade-right" data-aos-delay="200">
+                    <h3 class="text-xl font-semibold mb-2">3. Análisis Avanzado</h3>
+                    <p class="text-gray-600">Evaluación fonética y ortográfica detallada</p>
+                </div>
+                <div class="process-step" data-aos="fade-right" data-aos-delay="300">
+                    <h3 class="text-xl font-semibold mb-2">4. Evaluación de Riesgos</h3>
+                    <p class="text-gray-600">Alineado con criterios EMA</p>
+                </div>
+                <div class="process-step" data-aos="fade-right" data-aos-delay="400">
+                    <h3 class="text-xl font-semibold mb-2">5. Documentación</h3>
+                    <p class="text-gray-600">Generación de informes regulatorios completos</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section class="mb-20">
+            <div class="bg-primary text-dark rounded-2xl p-12 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-90"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-dark" data-aos="fade-up">Impacto Transformador</h2>
+                    <div class="grid md:grid-cols-4 gap-8">
+                        <div class="impact-card p-6 rounded-xl text-center text-dark" data-aos="fade-up" data-aos-delay="100">
+                            <div class="text-4xl mb-4 floating">⏳</div>
+                            <h3 class="text-xl font-semibold mb-2">Desarrollo Rápido</h3>
+                            <p class="text-gray-800">Reducción significativa en tiempos de desarrollo</p>
+                        </div>
+                        <div class="impact-card p-6 rounded-xl text-center text-dark" data-aos="fade-up" data-aos-delay="200">
+                            <div class="text-4xl mb-4 floating">📉</div>
+                            <h3 class="text-xl font-semibold mb-2">Menos Rechazos</h3>
+                            <p class="text-gray-800">Disminución en tasas de rechazo regulatorio</p>
+                        </div>
+                        <div class="impact-card p-6 rounded-xl text-center text-dark" data-aos="fade-up" data-aos-delay="300">
+                            <div class="text-4xl mb-4 floating">❤️</div>
+                            <h3 class="text-xl font-semibold mb-2">Mayor Seguridad</h3>
+                            <p class="text-gray-800">Mejora en la seguridad del paciente</p>
+                        </div>
+                        <div class="impact-card p-6 rounded-xl text-center text-dark" data-aos="fade-up" data-aos-delay="400">
+                            <div class="text-4xl mb-4 floating">✅</div>
+                            <h3 class="text-xl font-semibold mb-2">Cumplimiento</h3>
+                            <p class="text-gray-800">Facilita el cumplimiento regulatorio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-dark py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg text-gray-800">&copy; 2024 DrugFindr - Un nuevo paradigma en la nomenclatura farmacéutica</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>
