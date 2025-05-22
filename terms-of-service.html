@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - DrugFindr</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3B82F6;
+            --primary-light: #60A5FA;
+            --primary-dark: #2563EB;
+            --secondary: #10B981;
+            --accent: #8B5CF6;
+            --success: #10B981;
+            --dark: #0F172A;
+            --dark-light: #1E293B;
+            --light: #F8FAFC;
+            --text: #334155;
+            --muted: #94A3B8;
+            --shadow-color: rgba(15, 23, 42, 0.08);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #3B82F6;
+                --primary-light: #60A5FA;
+                --primary-dark: #2563EB;
+                --secondary: #10B981;
+                --accent: #8B5CF6;
+                --success: #10B981;
+                --dark: #F8FAFC;
+                --dark-light: #F1F5F9;
+                --light: #0F172A;
+                --text: #E2E8F0;
+                --muted: #94A3B8;
+                --shadow-color: rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+        }
+
+        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode h6 {
+            color: var(--dark);
+        }
+        
+        .prose {
+            color: var(--text);
+        }
+
+        .dark-mode .prose {
+            color: var(--text);
+        }
+
+        .prose-lg .text-primary {
+            color: var(--primary) !important;
+        }
+
+        .dark-mode .prose-lg .text-primary {
+            color: var(--primary-light) !important;
+        }
+
+        .dark-mode {
+            --primary: #3B82F6;
+            --primary-light: #60A5FA;
+            --primary-dark: #2563EB;
+            --secondary: #10B981;
+            --accent: #8B5CF6;
+            --success: #10B981;
+            --dark: #F8FAFC;
+            --dark-light: #F1F5F9;
+            --light: #0F172A;
+            --text: #E2E8F0;
+            --muted: #94A3B8;
+            --shadow-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .theme-toggle {
+            color: var(--primary);
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.5rem 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0.5rem;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        .nav-link:hover::after {
+            width: calc(100% - 1rem);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .legal-text {
+            background-color: var(--dark-light);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .legal-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .legal-section {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .legal-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.875rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .legal-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 3rem;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+
+        .legal-section p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .legal-section ul {
+            list-style-type: none;
+            margin-left: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-section li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .legal-section li::before {
+            content: '•';
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .legal-header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--accent) 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 2.5rem 0;
+        }
+
+        .legal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+
+        .legal-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+        }
+
+        .legal-header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .legal-header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .legal-header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .dark-mode .legal-section h2 {
+            color: var(--primary-light);
+        }
+
+        .dark-mode .legal-section li::before {
+            color: var(--primary-light);
+        }
+
+        .dark-mode .legal-text {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .legal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        /* Versus Circle Styles */
+        .versus-circle-container {
+            width: 300px; /* Diameter of the circle */
+            height: 300px; /* Diameter of the circle */
+            display: flex;
+            position: relative;
+            margin: 3rem auto; /* Center it and add some space */
+            border-radius: 50%; /* Make it a circle */
+            overflow: hidden; /* Crucial for splitting and shaping */
+            box-shadow: 0 10px 25px var(--shadow-color), 0 0 0 4px var(--dark); /* Border and shadow */
+            transition: transform 0.3s ease; /* For a little pop on main hover */
+        }
+
+        .versus-circle-container:hover {
+            transform: scale(1.02); /* Slight zoom on the whole circle */
+        }
+
+        .semicircle-half {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            transition: background-color 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer; /* Indicate interactivity */
+        }
+
+        .left-half {
+            background-color: #FFD700; /* Sunny yellow */
+        }
+
+        .right-half {
+            background-color: var(--dark-light); /* Dark programmer theme */
+        }
+
+        .semicircle-half .icon-placeholder {
+            font-size: 3.5rem; /* Make icons larger */
+            margin-bottom: 15px;
+            line-height: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .semicircle-half:hover .icon-placeholder {
+            transform: scale(1.1) rotate(-5deg); /* Icon animates a bit on hover */
+        }
+
+        .content-text {
+            font-family: 'Courier Prime', monospace; /* As per user's font list */
+            font-size: 1.1rem; /* Adjusted size */
+            font-weight: 700; /* Bold */
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1;
+        }
+
+        .left-half .lawyer-text {
+            color: var(--dark); /* Dark text on yellow */
+        }
+
+        .right-half .default-text {
+            color: var(--light);
+            position: absolute; /* To allow smooth transition with hover-text */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .right-half .hover-text {
+            color: var(--primary-light); /* Bright color for hover text */
+            position: absolute;
+            opacity: 0;
+            transform: translateY(20px); /* Start from below */
+            pointer-events: none; /* So it doesn't interfere with hover on parent */
+        }
+
+        .right-half:hover .default-text {
+            opacity: 0;
+            transform: translateY(-20px); /* Move up and fade out */
+        }
+
+        .right-half:hover .hover-text {
+            opacity: 1;
+            transform: translateY(0); /* Move to position and fade in */
+        }
+
+        .left-half:hover {
+            transform: translateX(-10px) rotate(-3deg) scale(1.03);
+            z-index: 10; /* Bring to front */
+            box-shadow: -5px 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .right-half:hover {
+            transform: translateX(10px) rotate(3deg) scale(1.03);
+            z-index: 10; /* Bring to front */
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .versus-circle-container::after {
+            content: '';
+            position: absolute;
+            top: 10%; 
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px; 
+            background-color: rgba(255, 255, 255, 0.3); 
+            z-index: 5; 
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode .versus-circle-container::after {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Theme Toggle -->
+    <button class="btn-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg xmlns="http://www.w3.org/2000/svg" class="theme-toggle h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+    </button>
+
+    <!-- Versus Circle Element -->
+    <div class="versus-circle-container" data-aos="zoom-in" data-aos-duration="1000">
+        <div class="semicircle-half left-half">
+            <div class="icon-placeholder">⚖️</div>
+            <p class="content-text lawyer-text">Lawyer by day</p>
+        </div>
+        <div class="semicircle-half right-half">
+            <div class="icon-placeholder">💻</div>
+            <p class="content-text default-text">Programmer</p>
+            <p class="content-text hover-text coder-text">Coder by night</p>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 max-w-7xl">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <header class="legal-header">
+                <div class="legal-header-content text-center">
+                    <h1>Terms of Service</h1>
+                    <p>Effective Date: January 1, 2025</p>
+                </div>
+            </header>
+
+            <main class="p-8 md:p-12">
+                <div class="legal-section" data-aos="fade-up">
+                    <h2>1. Agreement to Terms</h2>
+                    <div class="legal-text">
+                        <p>By accessing or using DrugFindr's services, you agree to be bound by these Terms of Service.</p>
+                    </div>
+                </div>
+
+                <div class="legal-section" data-aos="fade-up" data-aos-delay="100">
+                    <h2>2. Use of Service</h2>
+                    <div class="legal-text">
+                        <h3 class="text-xl font-semibold mb-4">2.1 Eligibility</h3>
+                        <p>You must be at least 18 years old to use our service.</p>
+                        
+                        <h3 class="text-xl font-semibold mt-6 mb-4">2.2 Account Registration</h3>
+                        <p>To access certain features, you must register for an account and provide accurate information.</p>
+                    </div>
+                </div>
+
+                <div class="legal-section" data-aos="fade-up" data-aos-delay="200">
+                    <h2>3. Account Registration and Security</h2>
+                    <div class="legal-text">
+                        <p>3.1 Registration Requirements</p>
+                        <p>To access certain features of the Service, you must register for an account. You agree to provide accurate, current, and complete information during the registration process and to update such information to keep it accurate, current, and complete. We reserve the right to suspend or terminate your account if any information provided during the registration process or thereafter proves to be inaccurate, false, or misleading.</p>
+                        
+                        <p>3.2 Account Security</p>
+                        <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account or any other breach of security. We cannot and will not be liable for any loss or damage arising from your failure to comply with this Section.</p>
+                        
+                        <p>3.3 Account Termination</p>
+                        <p>We reserve the right to terminate or suspend your account at any time, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms. Upon termination, your right to use the Service will immediately cease.</p>
+                    </div>
+                </div>
+
+                <div class="legal-section" data-aos="fade-up" data-aos-delay="300">
+                    <h2>4. Intellectual Property Rights</h2>
+                    <div class="legal-text">
+                        <p>4.1 Service Content</p>
+                        <p>The Service and its entire contents, features, and functionality (including but not limited to all information, software, text, displays, images, video, and audio, and the design, selection, and arrangement thereof) are owned by DrugFindr, its licensors, or other providers of such material and are protected by United States and international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.</p>
+                        
+                        <p>4.2 User Content</p>
+                        <p>By submitting, posting, or displaying content on or through the Service, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, adapt, publish, translate, create derivative works from, distribute, and display such content in connection with the Service. You represent and warrant that you own or control all rights to the content you submit and that the content does not violate these Terms.</p>
+                        
+                        <p>4.3 Restrictions</p>
+                        <p>You may not:</p>
+                        <ul>
+                            <li>Modify copies of any materials from the Service</li>
+                            <li>Use any illustrations, photographs, video or audio sequences, or any graphics separately from the accompanying text</li>
+                            <li>Delete or alter any copyright, trademark, or other proprietary rights notices from copies of materials from the Service</li>
+                            <li>Access or use the Service for any commercial purpose</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="legal-section" data-aos="fade-up" data-aos-delay="400">
+                    <h2>5. User Conduct and Prohibited Activities</h2>
+                    <div class="legal-text">
+                        <p>5.1 Acceptable Use</p>
+                        <p>You agree to use the Service only for lawful purposes and in accordance with these Terms. You agree not to use the Service:</p>
+                        <ul>
+                            <li>In any way that violates any applicable federal, state, local, or international law or regulation</li>
+                            <li>To transmit, or procure the sending of, any advertising or promotional material, including any "junk mail," "chain letter," "spam," or any other similar solicitation</li>
+                            <li>To impersonate or attempt to impersonate DrugFindr, a DrugFindr employee, another user, or any other person or entity</li>
+                            <li>To engage in any other conduct that restricts or inhibits anyone's use or enjoyment of the Service</li>
+                        </ul>
+                        
+                        <p>5.2 Prohibited Activities</p>
+                        <p>The following activities are strictly prohibited:</p>
+                        <ul>
+                            <li>Using the Service in any manner that could disable, overburden, damage, or impair the Service</li>
+                            <li>Using any robot, spider, or other automatic device, process, or means to access the Service for any purpose</li>
+                            <li>Introducing any viruses, trojan horses, worms, logic bombs, or other material that is malicious or technologically harmful</li>
+                            <li>Attempting to gain unauthorized access to, interfere with, damage, or disrupt any parts of the Service</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="legal-section" data-aos="fade-up" data-aos-delay="500">
+                    <h2>6. Disclaimer of Warranties</h2>
+                    <div class="legal-text">
+                        <p>6.1 "As Is" and "As Available"</p>
+                        <p>THE SERVICE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. NEITHER DRUGFINDR NOR ANY PERSON ASSOCIATED WITH DRUGFINDR MAKES ANY WARRANTY OR REPRESENTATION WITH RESPECT TO THE COMPLETENESS, SECURITY, RELIABILITY, QUALITY, ACCURACY, OR AVAILABILITY OF THE SERVICE.</p>
+                        
+                        <p>6.2 Disclaimer of Warranties</p>
+                        <p>TO THE FULLEST EXTENT PROVIDED BY LAW, WE HEREBY DISCLAIM ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.</p>
+                    </div>
+                </div>
+
+                <div class="legal-section" data-aos="fade-up" data-aos-delay="600">
+                    <h2>7. Limitation of Liability</h2>
+                    <div class="legal-text">
+                        <p>7.1 General Limitation</p>
+                        <p>TO THE FULLEST EXTENT PROVIDED BY LAW, IN NO EVENT WILL DRUGFINDR, ITS AFFILIATES, OR THEIR LICENSORS, SERVICE PROVIDERS, EMPLOYEES, AGENTS, OFFICERS, OR DIRECTORS BE LIABLE FOR DAMAGES OF ANY KIND, UNDER ANY LEGAL THEORY, ARISING OUT OF OR IN CONNECTION WITH YOUR USE, OR INABILITY TO USE, THE SERVICE.</p>
+                        
+                        <p>7.2 Specific Limitations</p>
+                        <p>IN PARTICULAR, DRUGFINDR WILL NOT BE LIABLE FOR:</p>
+                        <ul>
+                            <li>Any indirect, special, incidental, consequential, or punitive damages</li>
+                            <li>Any loss of profits, revenue, or data</li>
+                            <li>Any business interruption</li>
+                            <li>Any personal injury or property damage</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="legal-section">
+                    <h2>8. Indemnification</h2>
+                    <p>You agree to defend, indemnify, and hold harmless DrugFindr, its affiliates, licensors, and service providers, and its and their respective officers, directors, employees, contractors, agents, licensors, suppliers, successors, and assigns from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to your violation of these Terms or your use of the Service.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>9. Governing Law and Jurisdiction</h2>
+                    <p>All matters relating to the Service and these Terms, and any dispute or claim arising therefrom or related thereto, shall be governed by and construed in accordance with the laws of Spain, without giving effect to any choice or conflict of law provision or rule. Any legal suit, action, or proceeding arising out of, or related to, these Terms or the Service shall be instituted exclusively in the courts of Spain.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>10. Changes to Terms</h2>
+                    <p>We reserve the right to revise and update these Terms from time to time in our sole discretion. All changes are effective immediately when posted and apply to all access to and use of the Service thereafter. Your continued use of the Service following the posting of revised Terms means that you accept and agree to the changes.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>11. Contact Information</h2>
+                    <p>All feedback, comments, requests for technical support, and other communications relating to the Service should be directed to our contact form.</p>
+                </div>
+            </main>
+
+            <footer class="py-12 bg-dark-light text-white relative overflow-hidden" style="color: #fff; background: #1E293B;">
+                <div class="absolute inset-0 opacity-5 pointer-events-none">
+                    <div class="w-full h-full" style="background-image: linear-gradient(var(--primary) 1px, transparent 1px), linear-gradient(to right, var(--primary) 1px, transparent 1px); background-size: 20px 20px;"></div>
+                </div>
+                <div class="container mx-auto px-4 max-w-7xl relative z-10">
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <div class="mb-6 md:mb-0">
+                            <a href="drugfindr.html" class="flex items-center">
+                                <span class="bg-white rounded-lg w-8 h-8 flex items-center justify-center mr-2 border border-gray-300 shadow" style="color: #2563EB;">D</span>
+                                DrugFindr
+                            </a>
+                            <p>Revolutionizing pharmaceutical naming</p>
+                        </div>
+                        <div class="flex flex-col md:flex-row items-center gap-6">
+                            <a href="privacy-policy.html" class="transition-colors">Privacy Policy</a>
+                            <a href="terms-of-service.html" class="transition-colors">Terms of Service</a>
+                            <a href="license.html" class="transition-colors">License</a>
+                            <a href="contact.html" class="transition-colors">Contact</a>
+                        </div>
+                    </div>
+                    <div class="border-t border-white/10 mt-8 pt-8 text-center">
+                        <p>&copy; 2025 Isaac Sandiumenge - DrugFindr. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            
+            // Update toggle icon
+            const icon = themeToggle.querySelector('svg');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />';
+            } else {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />';
+            }
+        });
+
+        // Check for system dark mode preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark-mode');
+            if (themeToggle) {
+                const icon = themeToggle.querySelector('svg');
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />';
+            }
+        }
+
+        // Initialize AOS
+        AOS.init();
+
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMenuButton = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu && closeMenuButton) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('translate-x-full');
+            });
+
+            closeMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.add('translate-x-full');
+            });
+
+            // Close menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('translate-x-full');
+                });
+            });
+        }
+    </script>
+</body>
+</html> 
