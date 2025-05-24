@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Portfolio :: [Isaac Sandiumenge]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #1a1a2e; /* Azul noche profundo */
+            --bg-medium: #16213e; /* Azul oscuro más suave */
+            --bg-light: #0f3460; /* Azul más claro para acentos */
+            --primary-accent: #e94560; /* Coral vibrante */
+            --secondary-accent: #53a8b6; /* Turquesa suave */
+            --text-light: #e0e0e0;
+            --text-dark: #1a1a2e;
+            --text-muted: #a0a0a0;
+            --font-primary: 'Poppins', sans-serif;
+            --font-code: 'Roboto Mono', monospace;
+            --transition-speed: 0.3s;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            zoom: 0.67; /* Aplicamos el zoom para escalar la página */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--bg-medium) 0%, var(--bg-dark) 100%);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .logo {
+            font-family: var(--font-code);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-accent);
+            text-decoration: none;
+        }
+        .logo span {
+            color: var(--secondary-accent);
+        }
+
+        .logo.ambidex-logo {
+            font-family: var(--font-primary);
+            font-size: 1.7rem;
+            color: var(--text-light);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: color var(--transition-speed);
+        }
+        .logo.ambidex-logo i.fa-yin-yang {
+            color: var(--primary-accent);
+            margin-right: 10px;
+            font-size: 1.6rem;
+            transition: transform 0.4s ease, color var(--transition-speed);
+        }
+        .logo.ambidex-logo:hover {
+            color: var(--secondary-accent);
+        }
+        .logo.ambidex-logo:hover i.fa-yin-yang {
+            color: var(--secondary-accent);
+            transform: rotate(180deg);
+        }
+
+        /* Estilos para el logo interactivo Legal / Coder copiado de lawyer.html y adaptado */
+        .logo.legal-coder-logo-interactive { /* Contenedor principal del logo */
+            font-family: var(--font-primary); /* Poppins para coder.html */
+            font-weight: 600;
+            font-size: 1.7rem; /* Tamaño del texto del logo */
+            display: flex;
+            align-items: center;
+            text-decoration: none; 
+        }
+
+        .logo.legal-coder-logo-interactive .logo-part {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            padding: 3px 6px;
+            border-radius: 4px;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        .logo.legal-coder-logo-interactive .logo-part .icon-legal,
+        .logo.legal-coder-logo-interactive .logo-part .icon-code {
+            font-size: 1.5rem; /* Tamaño de los iconos */
+            transition: color var(--transition-speed), transform var(--transition-speed);
+        }
+
+        /* Parte Legal */
+        .logo.legal-coder-logo-interactive .logo-legal-part {
+            color: var(--secondary-accent); /* Turquesa para Legal en coder.html */
+        }
+        .logo.legal-coder-logo-interactive .logo-legal-part .icon-legal {
+            color: var(--secondary-accent);
+            margin-right: 8px;
+        }
+        .logo.legal-coder-logo-interactive .logo-legal-part:hover {
+            background-color: rgba(212, 175, 55, 0.15); /* Fondo amarillo dorado claro */
+        }
+        .logo.legal-coder-logo-interactive .logo-legal-part:hover .text-legal {
+            color: #D4AF37; /* Color amarillo dorado para el texto Legal */
+        }
+        .logo.legal-coder-logo-interactive .logo-legal-part:hover .icon-legal {
+            color: #D4AF37; /* Color amarillo dorado para el icono Legal */
+            transform: scale(1.1);
+        }
+
+        /* Parte Coder */
+        .logo.legal-coder-logo-interactive .logo-coder-part {
+            color: var(--primary-accent); /* Coral para Coder en coder.html */
+        }
+        .logo.legal-coder-logo-interactive .logo-coder-part .icon-code {
+            color: var(--primary-accent);
+            margin-left: 8px;
+        }
+        .logo.legal-coder-logo-interactive .logo-coder-part:hover {
+            background-color: rgba(233, 69, 96, 0.15); /* Fondo coral claro */
+            color: var(--primary-accent);
+        }
+        .logo.legal-coder-logo-interactive .logo-coder-part:hover .icon-code {
+            color: var(--primary-accent); /* Icono también coral en hover */
+            transform: scale(1.1);
+        }
+
+        /* Separador */
+        .logo.legal-coder-logo-interactive .logo-separator {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1.7rem; /* Mismo tamaño que el texto del logo */
+            padding: 0 5px;
+            transition: color var(--transition-speed);
+            border-radius: 4px; /* Para consistencia de hover si se añade */
+        }
+        .logo.legal-coder-logo-interactive .logo-separator:hover {
+            color: var(--primary-accent); /* O el color que prefieras para el hover del separador */
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-accent);
+            transition: width var(--transition-speed) ease-out;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary-accent);
+        }
+        nav ul li a:hover::after, nav ul li a.active::after {
+            width: 100%;
+        }
+
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=2069&auto=format&fit=crop') no-repeat center center/cover;
+            background-attachment: fixed; /* Parallax effect */
+            position: relative;
+        }
+        .hero::before { /* Overlay for readability */
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(26, 26, 46, 0.85); /* --bg-dark with opacity */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white; /* Ensure visibility over image */
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+        .hero h1 .highlight {
+            color: var(--primary-accent);
+        }
+        .hero .subtitle {
+            font-family: var(--font-code);
+            font-size: 1.5rem;
+            color: var(--secondary-accent);
+            margin-bottom: 30px;
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: rgba(15, 52, 96, 0.5); /* --bg-light with opacity */
+            border-radius: 5px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-accent);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
+        }
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(233, 69, 96, 0.6);
+        }
+        .cta-secondary {
+             background: transparent;
+             border: 2px solid var(--secondary-accent);
+             color: var(--secondary-accent);
+             margin-left: 15px;
+             box-shadow: none;
+        }
+        .cta-secondary:hover {
+            background: var(--secondary-accent);
+            color: var(--bg-dark);
+            box-shadow: 0 4px 15px rgba(83, 168, 182, 0.4);
+        }
+        .cta-balance {
+            display: block; /* Para que ocupe su propia línea o inline-block si quieres junto a otros */
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            border: 1px solid var(--text-muted);
+            padding: 8px 20px;
+            border-radius: 20px;
+            transition: color var(--transition-speed), border-color var(--transition-speed), background-color var(--transition-speed);
+        }
+        .cta-balance:hover {
+            color: var(--primary-accent);
+            border-color: var(--primary-accent);
+            background-color: rgba(233, 69, 96, 0.1);
+        }
+
+
+        /* Section Styling */
+        section {
+            padding: 60px 0;
+        }
+        section:nth-child(odd) { /* Alternating background for sections */
+             background-color: var(--bg-medium);
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--text-light);
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background-color: var(--primary-accent);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: opacity var(--transition-speed);
+        }
+        .project-card:hover img {
+            opacity: 0.8;
+        }
+        .project-content {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        .project-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary-accent);
+            margin-bottom: 10px;
+        }
+        .project-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+        .project-tags {
+            margin-bottom: 15px;
+        }
+        .project-tags .tag {
+            display: inline-block;
+            background-color: var(--bg-medium);
+            color: var(--secondary-accent);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            font-family: var(--font-code);
+        }
+        .project-links a {
+            color: var(--secondary-accent);
+            text-decoration: none;
+            margin-right: 15px;
+            font-weight: 500;
+            transition: color var(--transition-speed);
+        }
+        .project-links a:hover {
+            color: var(--primary-accent);
+        }
+        .project-links a i {
+            margin-right: 5px;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .skill-item {
+            background-color: var(--bg-light);
+            padding: 20px 25px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 120px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .skill-item i {
+            font-size: 2.5rem;
+            color: var(--primary-accent);
+            margin-bottom: 10px;
+        }
+        .skill-item span {
+            display: block;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        /* GitHub Section */
+        #github {
+            background-color: var(--bg-medium); /* Consistent with alternating backgrounds */
+        }
+        .github-showcase {
+            text-align: center;
+        }
+        .github-showcase p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--text-muted);
+        }
+        /* Consider embedding GitHub activity or repos here using JavaScript if desired */
+
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-dark);
+            text-align: center;
+            padding: 30px 0;
+            border-top: 3px solid var(--bg-light);
+        }
+        footer p {
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+        .footer-links a, .social-media a {
+            color: var(--secondary-accent);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color var(--transition-speed);
+        }
+        .footer-links a:hover, .social-media a:hover {
+            color: var(--primary-accent);
+        }
+        .social-media { margin-top: 10px; }
+        .social-media a i { font-size: 1.5rem; }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero .subtitle { font-size: 1.2rem; }
+            .section-title { font-size: 2.3rem; }
+        }
+        @media (max-width: 768px) {
+            header .container { flex-direction: column; }
+            .logo { margin-bottom: 15px; }
+            nav ul { justify-content: center; flex-wrap: wrap; }
+            nav ul li { margin: 5px 10px; }
+            
+            .hero { min-height: 60vh; padding: 40px 0;}
+            .hero h1 { font-size: 2.2rem; }
+            .hero .subtitle { font-size: 1rem; }
+            .cta-button { font-size: 1rem; padding: 10px 25px; }
+
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Utility class for animations (example) */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInAnimation 0.8s ease-out forwards;
+        }
+        @keyframes fadeInAnimation {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .balance-link-coder {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary-accent); /* Coral */
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 1px solid var(--primary-accent); /* Coral */
+            border-radius: 20px;
+            transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed);
+        }
+
+        .balance-link-coder:hover {
+            background-color: #FFD700; /* Amarillo dorado más fuerte para el botón en hover */
+            color: var(--bg-dark); /* Texto oscuro para contraste en el botón en hover */
+            border-color: #DAA520; /* Amarillo dorado más oscuro para el borde del botón en hover */
+        }
+
+        .balance-link-coder:active {
+            background-color: #FFD700; /* Amarillo dorado más fuerte para el botón */
+            color: var(--bg-dark); /* Texto oscuro para contraste en el botón */
+            border-color: #DAA520; /* Amarillo dorado más oscuro para el borde del botón */
+        }
+
+        .balance-link-coder:hover i.fa-balance-scale,
+        .balance-link-coder:active i.fa-balance-scale {
+            background-color: white; /* Fondo blanco para el icono */
+            color: black; /* Icono (letra) negro */
+            border: 2px solid #FFD700; /* Borde amarillo fuerte alrededor del icono */
+            border-radius: 50%; /* Para hacerlo redondo */
+            padding: 4px; /* Espacio interno para que el icono no toque el borde */
+            /* Ajustes para asegurar que el icono no cambie mucho de tamaño o posición */
+            display: inline-block; /* Para que padding y border-radius funcionen bien */
+            vertical-align: middle; /* Para alinear mejor con el texto si es necesario */
+            line-height: 1; /* Para controlar la altura si es necesario */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo legal-coder-logo-interactive">
+                <a href="lawyer.html" class="logo-part logo-legal-part" title="Ir a Perfil Legal">
+                    <i class="fas fa-balance-scale icon-legal"></i>
+                    <span class="text-legal">Legal</span>
+                </a>
+                <a href="index.html" class="logo-separator" title="Ir a Balance">/</a>
+                <a href="coder.html" class="logo-part logo-coder-part" title="Ir a Perfil Coder">
+                    <span class="text-coder">Coder</span>
+                    <i class="fas fa-code icon-code"></i>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#hero">Intro</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#github">GitHub</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="hero-content container">
+            <h1>Hola, soy <span class="highlight">Isaac Sandiumenge</span></h1>
+            <p class="subtitle">// Abogado | Aprendiz entusiasta de Programación</p>
+            <p style="margin-bottom: 30px; max-width: 600px; margin-left:auto; margin-right:auto;">Combinando mi profesión legal con mi curiosidad por la tecnología. Explorando el mundo de la programación en mi tiempo libre con la ayuda de IA y recursos autodidactas.</p>
+            <a href="#projects" class="cta-button">Mis Proyectos</a>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2 class="section-title">Mi Viaje en la Programación</h2>
+        <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+            <p class="fade-in" style="animation-delay: 0.2s;">Como abogado que trabaja a tiempo completo, mi tiempo para aprender programación es limitado. Mi interés comenzó con VBA en Excel para automatizar tareas repetitivas, y actualmente estoy dando mis primeros pasos en Python.</p>
+            <p class="fade-in" style="animation-delay: 0.4s;">Mi método de aprendizaje es principalmente práctico, trabajando en proyectos concretos con ayuda de inteligencia artificial. Uso IA como herramienta para avanzar en mis proyectos mientras aprendo de las soluciones que propone, adaptándolas a mis necesidades específicas.</p>
+            <p class="fade-in" style="animation-delay: 0.6s;">Aunque estoy al principio de este camino, me entusiasma crear puentes entre el mundo legal y el tecnológico, desarrollando pequeñas soluciones que faciliten mi trabajo diario como abogado.</p>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Mis Proyectos</h2>
+            <div class="projects-grid">
+                <!-- Fila Superior -->
+                <!-- Proyecto DrugFindr (Izquierda) -->
+                <div class="project-card fade-in" style="animation-delay: 0.1s;">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="Proyecto DrugFindr">
+                    <div class="project-content">
+                        <h3>Software regulatorio farmacéutico: DrugFindr</h3>
+                        <p>Aplicación web para la comparación y generación de designaciones farmacéuticas que cumplan con los requisitos de la EMA.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span><span class="tag">C++</span><span class="tag">ChatGPT</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="DrugFindr.html" target="_blank"><i class="fas fa-external-link-alt"></i> Ver Proyecto</a>
+                            <!-- <a href="#" target="_blank"><i class="fab fa-github"></i> Ver Código</a> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto Python (Derecha) -->
+                <div class="project-card fade-in" style="animation-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop" alt="Proyecto Python"> <!-- Imagen añadida -->
+                    <div class="project-content">
+                        <h3>Proyectos con Python</h3>
+                        <p>A medida que surgen necesidades que requiren de análisis y validación de datos exhaustivo, donde la revisión manual no es suficiente, me apoyo en la programación para desarrollar programas que me ayuden a optimizar estos procesos. Pueden consultarlos en mi página de Github.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span><span class="tag">Aprendizaje IA</span><span class="tag">Principiante</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila Inferior -->
+                <!-- Proyecto TrademarkFindr (Izquierda) -->
+                <div class="project-card fade-in" style="animation-delay: 0.3s;">
+                    <img src="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?q=80&w=2070&auto=format&fit=crop" alt="Proyecto TrademarkFindr">
+                    <div class="project-content">
+                        <h3>TrademarkFindr</h3> <!-- Título cambiado -->
+                        <p>Software alimentado con la API de Trademark View de la EUIPO que permite buscar marcas, controlar marcas que pudieran generar riesgo e incluso resaltar descripción de clases de productos/servicios que podría ser infractora.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span><span class="tag">EUIPO</span><span class="tag">TrademarkView</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto VBA (Derecha) -->
+                <div class="project-card fade-in" style="animation-delay: 0.4s;">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2064&auto=format&fit=crop" alt="Proyecto VBA en Excel">
+                    <div class="project-content">
+                        <h3>Proyectos con VBA en Excel</h3>
+                        <p></Em>Proyectos de programación de Excel con VBA, yendo desde un sistema de seguimiento de marcas desde la comodidad de una hoja de Excel con envío de notificaciones por correo electrónico si una marca pasa a estar concedida a una calculadora de plazos que predice en qué momento se llevará a cabo cada una de las etapas procesales para la concesión de una marca o procedimiento judicial con tan solo la fecha de presentación de la solicitud de marca o recurso.</p>
+                        <div class="project-tags">
+                            <span class="tag">Excel</span><span class="tag">VBA</span><span class="tag">Facturas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Mis Herramientas de Aprendizaje</h2>
+            <div class="skills-grid">
+                <div class="skill-item fade-in" style="animation-delay: 0.1s;"> <i class="fas fa-file-excel"></i> <span>VBA/Excel (Principiante)</span> </div>
+                <div class="skill-item fade-in" style="animation-delay: 0.2s;"> <i class="fab fa-python"></i> <span>Python (Principiante)</span> </div>
+                <div class="skill-item fade-in" style="animation-delay: 0.3s;"> <i class="fas fa-robot"></i> <span>Programación asistida por IA</span> </div>
+                <div class="skill-item fade-in" style="animation-delay: 0.4s;"> <i class="fas fa-book"></i> <span>Aprendizaje por libros</span> </div>
+                <div class="skill-item fade-in" style="animation-delay: 0.5s;"> <i class="fas fa-project-diagram"></i> <span>Aprendizaje por proyectos</span> </div>
+                <div class="skill-item fade-in" style="animation-delay: 0.6s;"> <i class="fas fa-graduation-cap"></i> <span>Autodidacta</span> </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="github">
+        <div class="container github-showcase">
+            <h2 class="section-title">Mi Aprendizaje</h2>
+            <p>Mi camino de aprendizaje es realista y adaptado a mis limitaciones de tiempo. Estoy explorando la programación mientras mantengo mi carrera legal, utilizando herramientas de IA para avanzar en proyectos prácticos y documentando mi progreso.</p>
+            <a href="https://github.com/Isandi98" target="_blank" class="cta-button github-profile-link"><i class="fab fa-github"></i> Ver mi Progreso en GitHub</a>
+        </div>
+    </section>
+    
+    <section id="contact" class="container" style="text-align: center;">
+         <h2 class="section-title">¿Conectamos?</h2>
+         <p style="max-width: 750px; margin: 0 auto 30px auto; font-size: 1.1rem; color: var(--text-light);">Si mi perfil te ha resultado interesante, estás buscando un profesional con mis habilidades, o simplemente te gustaría explorar posibles colaboraciones o intercambiar ideas, estaré encantado de que te pongas en contacto conmigo a través de los siguientes canales:</p>
+         <div class="contact-buttons" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+            <a href="mailto:isaac.sandi98@gmail.com" class="cta-button" style="min-width: 180px;"><i class="fas fa-envelope"></i> Enviar un Mensaje</a>
+            <a href="https://www.linkedin.com/in/isaac-yael-sandiumenge-torres-955063232/" target="_blank" class="cta-button cta-secondary" style="min-width: 180px;"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+            <a href="https://github.com/Isandi98" target="_blank" class="cta-button cta-secondary" style="background-color: #333; color: white; border-color: #333; min-width: 180px;"><i class="fab fa-github"></i> GitHub</a>
+         </div>
+    </section>
+
+
+    <footer class="coder-footer">
+        <div class="container">
+            <div class="social-media">
+                <a href="https://github.com/Isandi98" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/isaac-yael-sandiumenge-torres-955063232/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <!-- Añade otras redes si es relevante -->
+            </div>
+            <div class="footer-contact-info">
+                <p style="color: var(--text-light);">Isaac Sandiumenge</p>
+                <p><a href="mailto:isaac.sandi98@gmail.com" style="color: var(--secondary-accent);">isaac.sandi98@gmail.com</a></p>
+            </div>
+            <div class="footer-links">
+                <!-- <a href="#privacidad">Política de Privacidad</a> -->
+            </div>
+            <p style="margin-top: 15px; color: var(--text-muted);">&copy; 2025 <a href="#hero" style="color: var(--primary-accent); text-decoration:none;">Isaac Sandiumenge</a>. Todos los derechos reservados.</p>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">"Abogado de día, Programador de noche"</p>
+            <a href="lawyer.html" class="balance-link-coder"><i class="fas fa-balance-scale"></i> Descubre mi lado más jurídico</a>
+        </div>
+    </footer>
+    
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('header nav a[href^="#"], .hero a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId.length > 1 && document.querySelector(targetId)) {
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Update active link in header
+                    document.querySelectorAll('header nav a').forEach(a => a.classList.remove('active'));
+                    // For hero buttons, highlight corresponding nav link in nav
+                    const navLink = document.querySelector(`header nav a[href="${targetId}"]`);
+                    if(navLink) navLink.classList.add('active');
+                }
+            });
+        });
+
+        // Active link highlighting on scroll
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll("header nav a");
+
+        window.addEventListener("scroll", () => {
+            let current = ""; 
+            // Asegurarse que sections existe y tiene elementos antes de acceder a offsetTop
+            if (sections && sections.length > 0) {
+                sections.forEach((section) => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) { 
+                        current = section.getAttribute("id");
+                    }
+                });
+            }
+
+            navLinks.forEach((a) => {
+                a.classList.remove("active");
+                const href = a.getAttribute("href");
+
+                if (window.location.pathname.endsWith('index.html') && href === 'index.html') {
+                    a.classList.add("active");
+                } else if (window.location.pathname.endsWith('coder.html')) {
+                    if (href === `#\${current}`) {
+                        a.classList.add("active");
+                    }
+                    // Activar "Intro" si no hay otra sección y estamos al inicio de coder.html
+                    if (!current && href === "#hero" && sections.length > 0 && pageYOffset < sections[0].offsetTop - 100) {
+                        const introLink = document.querySelector('header nav a[href="#hero"]');
+                        if(introLink) introLink.classList.add('active');
+                    } else if (!current && href === "#hero" && sections.length === 0) { // Caso borde: no hay secciones, solo hero
+                        const introLink = document.querySelector('header nav a[href="#hero"]');
+                        if(introLink) introLink.classList.add('active');
+                    }
+                } else if (window.location.pathname.endsWith('lawyer.html')) {
+                    // Lógica similar para lawyer.html si fuera necesario (actualmente no se edita aquí)
+                }
+            });
+        });
+
+        // Simple fade-in animation on scroll for elements with .fade-in
+        const fadeInElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target); // Optional: stop observing after animation
+                }
+            });
+        }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+        fadeInElements.forEach(el => {
+            el.style.animationPlayState = 'paused'; // Start paused
+            observer.observe(el);
+        });
+
+        // Placeholder: Recuerda cambiar [Tu Nombre/Alias], [X] años, [TU_USUARIO_GITHUB], etc.
+        // por tu información real.
+    </script>
+
+</body>
+</html> 
