@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrugFindr - Pharmaceutical Innovation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3B82F6;
+            --primary-light: #60A5FA;
+            --primary-dark: #2563EB;
+            --secondary: #10B981; /* Verde */
+            --accent: #8B5CF6; /* Púrpura */
+            --success: #10B981;
+            --dark: #0F172A; /* Definición original de DrugFindr */
+            --dark-light: #1E293B; /* Definición original de DrugFindr */
+            --light: #F8FAFC;
+            --text: #334155;
+            --muted: #94A3B8; /* DrugFindr tiene --muted, se usará este */
+            --shadow-color: rgba(15, 23, 42, 0.08);
+
+            /* Variables de coder.html (algunas pueden sobreescribir o ser alias) */
+            --bg-dark: #1a1a2e; /* Azul noche profundo - de coder.html */
+            --bg-medium: #16213e; /* Azul oscuro más suave - de coder.html */
+            /* --bg-light: #0f3460; */ /* Azul más claro para acentos - de coder.html, DrugFindr ya tiene --light */
+            --primary-accent: #e94560; /* Coral vibrante - de coder.html */
+            --secondary-accent: #53a8b6; /* Turquesa suave - de coder.html */
+            /* --text-light: #e0e0e0; */ /* DrugFindr usa --text para el modo oscuro que es similar */
+            /* --text-dark: #1a1a2e; */ /* DrugFindr usa --text para el modo claro que es similar */
+            --font-primary: 'Poppins', sans-serif; /* de coder.html */
+            --font-code: 'Roboto Mono', monospace; /* de coder.html */
+            --transition-speed: 0.3s; /* de coder.html */
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* de coder.html */
+
+            /* Nuevos colores para iconos */
+            --icon-color-1: #EF4444; /* Rojo */
+            --icon-color-2: #F97316; /* Naranja */
+            --icon-color-3: #EAB308; /* Amarillo */
+            --icon-color-4: #22C55E; /* Verde Esmeralda */
+            --icon-color-5: #0EA5E9; /* Azul Cielo */
+            --icon-color-6: #D946EF; /* Fucsia */
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #3B82F6;
+                --primary-light: #60A5FA;
+                --primary-dark: #2563EB;
+                --secondary: #10B981;
+                --accent: #8B5CF6;
+                --success: #10B981;
+                --dark: #F8FAFC;
+                --dark-light: #F1F5F9;
+                --light: #0F172A;
+                --text: #E2E8F0;
+                --muted: #94A3B8;
+                --shadow-color: rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .dark-mode {
+            --primary: #3B82F6;
+            --primary-light: #60A5FA;
+            --primary-dark: #2563EB;
+            --secondary: #10B981;
+            --accent: #8B5CF6;
+            --success: #10B981;
+            --dark: #F8FAFC;
+            --dark-light: #F1F5F9;
+            --light: #0F172A;
+            --text: #E2E8F0;
+            --muted: #94A3B8;
+            --shadow-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .theme-toggle {
+            color: var(--primary);
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--accent));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section h1 {
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra de texto más sutil */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .bg-grid {
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            mask-image: radial-gradient(circle at center, transparent 0%, black 100%);
+            -webkit-mask-image: radial-gradient(circle at center, transparent 0%, black 100%);
+            mask: radial-gradient(circle at center, transparent 0%, black 100%);
+        }
+
+        .bg-glow {
+            position: absolute;
+            width: 60%;
+            height: 40%;
+            background: var(--accent);
+            filter: blur(180px);
+            opacity: 0.15;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            animation: pulse 8s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.1; }
+            100% { opacity: 0.2; }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            font-weight: 500;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+            z-index: 1;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            font-weight: 500;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            /* background: linear-gradient(135deg, var(--primary-light), var(--primary)); Eliminamos el fondo original */
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.7; /* Un poco más sutil el borde brillante */
+        }
+
+        /* Animación de pulso para los iconos */
+        @keyframes iconPulse {
+            0% { transform: scale(1); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+            50% { transform: scale(1.08); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+            100% { transform: scale(1); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        }
+
+        .glass-card:hover .feature-icon {
+            /* transform: scale(1.1); Eliminamos el scale general del hover de la tarjeta */
+            /* background: linear-gradient(135deg, var(--primary), var(--accent)); Eliminamos cambio de fondo */
+            /* box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3); Eliminamos sombra específica */
+            animation: iconPulse 0.8s ease-in-out;
+        }
+
+        /* Estilos individuales para cada icono */
+        .feature-icon.icon-1 { background: var(--icon-color-1); }
+        .feature-icon.icon-2 { background: var(--icon-color-2); }
+        .feature-icon.icon-3 { background: var(--icon-color-3); }
+        .feature-icon.icon-4 { background: var(--icon-color-4); }
+        .feature-icon.icon-5 { background: var(--icon-color-5); }
+        .feature-icon.icon-6 { background: var(--icon-color-6); }
+
+        .video-container {
+            overflow: hidden;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            position: relative;
+            background: #000;
+            transition: all 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container img {
+            transition: transform 0.5s ease;
+        }
+
+        .video-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .video-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-play:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: var(--primary);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.5rem 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0.5rem;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        .nav-link:hover::after {
+            width: calc(100% - 1rem);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: auto;
+                padding: 6rem 0;
+            }
+            
+            .glass-card {
+                padding: 1.5rem;
+            }
+            
+            .btn-primary, .btn-secondary {
+                padding: 0.75rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        .animated-gradient {
+            background: linear-gradient(270deg, var(--primary), var(--secondary), var(--accent));
+            background-size: 600% 600%;
+            animation: gradient-animation 8s ease infinite;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Video section */
+        .video-section {
+            background: var(--dark-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-bg-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: 0;
+        }
+
+        /* Aspect ratio utilities que faltaban */
+        .aspect-w-16 {
+            position: relative;
+            padding-bottom: calc(var(--tw-aspect-h) / var(--tw-aspect-w) * 100%);
+            --tw-aspect-w: 16;
+            overflow: hidden !important;
+        }
+
+        .aspect-h-9 {
+            --tw-aspect-h: 9;
+        }
+
+        .aspect-w-16 > * {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        /* Botón de reproducción grande y visible */
+        .play-button-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+            background: rgba(0, 0, 0, 0.3) !important;
+            border: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .play-button-overlay:hover {
+            background: rgba(0, 0, 0, 0.5) !important;
+        }
+        
+        .play-button-overlay::before, .play-button-overlay::after {
+            content: none !important;
+        }
+        
+        .play-button-large {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .play-button-large svg {
+            width: 40px;
+            height: 40px;
+            color: white;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+        
+        .play-button-overlay:hover .play-button-large {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .play-text {
+            position: absolute;
+            bottom: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Corrección para iframe de video */
+        iframe#demo-video {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            overflow: hidden !important;
+            background-color: #000 !important;
+        }
+        
+        #video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 20;
+            overflow: hidden !important;
+        }
+
+        /* Estilos para el contenedor aspect-ratio */
+        .aspect-w-16.aspect-h-9.relative {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Ocultar completamente el botón de play antiguo que ya no se usa */
+        .video-play#play-btn {
+            display: none !important;
+        }
+
+        /* Nuevos estilos para los iconos de la sección IMPACT */
+        .impact-icon {
+            width: 60px; /* Mismo tamaño que feature-icon para consistencia */
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white; /* Asumimos que los SVG son blancos o se controlan por stroke/fill */
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            margin-left: auto; /* Para centrar si es necesario */
+            margin-right: auto;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .impact-icon::after { /* Mismo borde brillante que feature-icon */
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        .glass-card:hover .impact-icon {
+            animation: iconPulse 0.8s ease-in-out; /* Reutilizamos la animación iconPulse */
+        }
+
+        /* Colores específicos para los iconos de IMPACT */
+        .impact-icon.icon-impact-1 { background: var(--icon-color-1); } /* Rojo */
+        .impact-icon.icon-impact-2 { background: var(--icon-color-2); } /* Naranja */
+        .impact-icon.icon-impact-3 { background: var(--icon-color-4); } /* Verde Esmeralda */
+        .impact-icon.icon-impact-4 { background: var(--icon-color-5); } /* Azul Cielo */
+
+        /* Footer adjustments for consistent legibility */
+        footer.bg-dark-light {
+            background-color: var(--dark-light) !important; /* Ensure dark background always */
+        }
+        footer.bg-dark-light h3,
+        footer.bg-dark-light p,
+        footer.bg-dark-light a {
+            color: var(--light) !important; /* Ensure light text always */
+        }
+        footer.bg-dark-light a:hover {
+            color: var(--primary-light) !important; /* Lighter color for hover */
+        }
+        footer.bg-dark-light .text-primary-dark {
+            color: var(--primary-dark) !important; /* For the 'D' in DrugFindr logo, if needed */
+        }
+
+        /* Glow animado para el botón principal */
+        .btn-primary.glow {
+            box-shadow: 0 0 16px 4px var(--accent), 0 0 32px 8px var(--primary-light);
+            animation: glowPulse 2s infinite alternate;
+        }
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 16px 4px var(--accent), 0 0 32px 8px var(--primary-light); }
+            100% { box-shadow: 0 0 32px 12px var(--primary), 0 0 48px 16px var(--accent); }
+        }
+        /* Sombra y elevación en tarjetas al hacer hover */
+        .glass-card, .impact-card {
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .glass-card:hover, .impact-card:hover {
+            box-shadow: 0 12px 32px rgba(59,130,246,0.18), 0 2px 8px rgba(139,92,246,0.12);
+            transform: translateY(-8px) scale(1.03);
+        }
+        /* Fondo animado header */
+        .header-animated-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background: linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
+            opacity: 0.12;
+            animation: headerBgMove 8s linear infinite alternate;
+        }
+        @keyframes headerBgMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        /* Scrollspy: resalta el enlace activo */
+        .nav-link.active {
+            color: var(--primary-light) !important;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .nav-link.active {
+                text-decoration: underline;
+            }
+        }
+        /* Animación de iconos al hacer hover */
+        .feature-icon, .impact-icon {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .feature-icon:hover, .impact-icon:hover {
+            transform: scale(1.12) rotate(-8deg);
+        }
+        /* Botón Ir arriba flotante */
+        #scrollTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 100;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            box-shadow: 0 4px 16px rgba(59,130,246,0.18);
+            cursor: pointer;
+            font-size: 2rem;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, transform 0.2s;
+        }
+        #scrollTopBtn:hover {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+        /* Transición de color en el menú al hacer scroll */
+        .navbar-scroll {
+            background: rgba(15, 23, 42, 0.85) !important;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            transition: background 0.3s;
+        }
+        /* Carrusel de testimonios */
+        .testimonial-carousel {
+            overflow: hidden;
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .testimonial-slide {
+            display: none;
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+        .testimonial-slide.active {
+            display: block;
+            animation: fadeIn 0.7s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .testimonial-author {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        /* Animación de números */
+        .impact-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        /* Partículas header */
+        #particles-header {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Estilos para el logo interactivo Legal / Coder (adaptado de coder.html) */
+        .logo.legal-coder-logo-interactive {
+            font-family: var(--font-primary, 'Poppins', sans-serif); /* Fallback si --font-primary no está definido */
+            font-weight: 600;
+            font-size: 1.7rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo.legal-coder-logo-interactive .logo-part { /* Aplica a las etiquetas <a> para Legal y Coder */
+            display: flex;
+            align-items: center;
+            text-decoration: none; 
+            padding: 3px 6px;
+            border-radius: 4px;
+            transition: background-color var(--transition-speed, 0.3s), color var(--transition-speed, 0.3s);
+        }
+
+        .logo.legal-coder-logo-interactive .logo-part .icon-legal,
+        .logo.legal-coder-logo-interactive .logo-part .icon-code {
+            font-size: 1.5rem; /* Tamaño de los iconos */
+            transition: color var(--transition-speed, 0.3s), transform var(--transition-speed, 0.3s);
+        }
+
+        /* Parte Legal */
+        .logo.legal-coder-logo-interactive a.logo-legal-part {
+            color: var(--secondary-accent, #53a8b6); 
+        }
+        .logo.legal-coder-logo-interactive a.logo-legal-part .icon-legal {
+            /* color: var(--secondary-accent, #53a8b6); /* Hereda de la <a> padre */
+            margin-right: 8px;
+        }
+        .logo.legal-coder-logo-interactive a.logo-legal-part:hover {
+            background-color: rgba(212, 175, 55, 0.15); /* Fondo amarillo dorado claro */
+            color: #D4AF37 !important; /* Color amarillo dorado para el texto e icono Legal. !important para asegurar override si es necesario */
+        }
+        .logo.legal-coder-logo-interactive a.logo-legal-part:hover .text-legal,
+        .logo.legal-coder-logo-interactive a.logo-legal-part:hover .icon-legal {
+            color: #D4AF37 !important; /* Asegurar que los hijos también cambien */
+        }
+        .logo.legal-coder-logo-interactive a.logo-legal-part:hover .icon-legal {
+            transform: scale(1.1);
+        }
+
+        /* Parte Coder */
+        .logo.legal-coder-logo-interactive a.logo-coder-part {
+            color: var(--primary-accent, #e94560); 
+        }
+        .logo.legal-coder-logo-interactive a.logo-coder-part .icon-code {
+            /* color: var(--primary-accent, #e94560); /* Hereda de la <a> padre */
+            margin-left: 8px; /* Icono después del texto */
+        }
+        .logo.legal-coder-logo-interactive a.logo-coder-part:hover {
+            background-color: rgba(233, 69, 96, 0.15); /* Fondo coral claro */
+            color: var(--primary-accent, #e94560) !important; /* Mantener color de texto e icono */
+        }
+        .logo.legal-coder-logo-interactive a.logo-coder-part:hover .text-coder,
+        .logo.legal-coder-logo-interactive a.logo-coder-part:hover .icon-code {
+            color: var(--primary-accent, #e94560) !important; /* Asegurar que los hijos mantengan el color */
+        }
+        .logo.legal-coder-logo-interactive a.logo-coder-part:hover .icon-code {
+            transform: scale(1.1);
+        }
+
+        /* Separador */
+        .logo.legal-coder-logo-interactive .logo-separator {
+            color: var(--text-muted, #a0a0a0);
+            font-size: 1.7rem; 
+            padding: 0 5px;
+            transition: color var(--transition-speed, 0.3s), background-color var(--transition-speed, 0.3s);
+            border-radius: 4px; 
+            cursor: default; /* No es un enlace */
+        }
+        .logo.legal-coder-logo-interactive .logo-separator:hover {
+            color: var(--primary-accent, #e94560); 
+            background-color: rgba(255,255,255,0.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button class="btn-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg xmlns="http://www.w3.org/2000/svg" class="theme-toggle h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="hero-section relative">
+        <div class="header-animated-bg"></div>
+        <div id="particles-header"></div>
+        <div class="bg-grid"></div>
+        <div class="bg-glow"></div>
+        
+        <!-- Floating Graphics Elements (High-tech touch) -->
+        <div class="absolute top-[20%] left-[15%] w-16 h-16 opacity-70" style="animation: float 8s ease-in-out infinite">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                <path fill="rgba(255, 255, 255, 0.2)" d="M38.9,-49.5C51.1,-40.3,62.2,-28.1,67.8,-13.2C73.4,1.7,73.5,19.3,66.7,34C59.9,48.8,46.3,60.7,30.7,67.7C15.1,74.7,-2.4,76.8,-19.2,72.9C-36,69,-52.2,59.2,-62.5,45C-72.9,30.8,-77.4,12.2,-76.1,-6C-74.7,-24.3,-67.4,-42.2,-54.4,-51.6C-41.4,-61,-20.7,-61.8,-2.2,-59.2C16.3,-56.6,32.7,-50.5,38.9,-49.5Z" transform="translate(100 100)" />
+            </svg>
+        </div>
+        
+        <div class="absolute top-[70%] right-[20%] w-24 h-24 opacity-70" style="animation: float 10s ease-in-out infinite alternate">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                <path fill="rgba(255, 255, 255, 0.15)" d="M56.6,-71.2C73.6,-60.5,87.8,-42.8,92.7,-22.7C97.5,-2.7,93,19.7,81.5,36.7C70,53.7,51.4,65.2,31.9,72.5C12.3,79.8,-8.2,82.8,-27.7,77.7C-47.3,72.6,-65.9,59.5,-76.1,41.8C-86.2,24.1,-87.9,1.9,-83.1,-18.2C-78.2,-38.3,-66.7,-56.3,-50.5,-67.4C-34.3,-78.5,-13.5,-82.6,3.9,-87.4C21.3,-92.1,39.6,-81.9,56.6,-71.2Z" transform="translate(100 100)" />
+            </svg>
+        </div>
+        
+        <!-- Navigation -->
+        <header class="sticky top-0 z-[1000] shadow-[0_2px_15px_rgba(0,0,0,0.2)]" style="background: linear-gradient(135deg, var(--bg-medium, #16213e) 0%, var(--bg-dark, #1a1a2e) 100%); padding: 20px 0;">
+            <div class="container mx-auto px-4 flex justify-between items-center" style="padding: 10px 0;">
+                <div class="logo legal-coder-logo-interactive">
+                    <a href="lawyer.html" class="logo-part logo-legal-part">
+                        <i class="fas fa-gavel icon-legal"></i>
+                        <span class="text-legal">Legal</span>
+                    </a>
+                    <span class="logo-separator">/</span>
+                    <a href="coder.html" class="logo-part logo-coder-part">
+                        <span class="text-coder">Coder</span>
+                        <i class="fas fa-code icon-code"></i>
+                    </a>
+                </div>
+                <nav>
+                    <ul class="hidden md:flex space-x-2 list-none">
+                        <li><a href="#features" class="nav-link">Features</a></li>
+                        <li><a href="#demo" class="nav-link">Demo</a></li>
+                        <li><a href="#impact" class="nav-link">Impact</a></li>
+                        <li><a href="#research" class="nav-link">Research</a></li>
+                    </ul>
+                </nav>
+                <button id="mobile-menu-button" class="md:hidden text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 bg-dark-light z-50 transform translate-x-full right-0 left-auto transition-transform duration-300 ease-in-out">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex justify-between items-center mb-10">
+                    <a href="index.html" class="flex items-center">
+                        <span class="bg-white rounded-lg w-8 h-8 flex items-center justify-center mr-2 border border-gray-300 shadow" style="color: #2563EB;">D</span>
+                        <span class="font-bold text-2xl tracking-tight">DrugFindr</span>
+                    </a>
+                    <button id="close-menu" class="text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex flex-col space-y-6">
+                    <a href="#features" class="text-white text-xs font-light tracking-tight">Features</a>
+                    <a href="#demo" class="text-white text-xs font-light tracking-tight">Demo</a>
+                    <a href="#impact" class="text-white text-xs font-light tracking-tight">Impact</a>
+                    <a href="#research" class="text-white text-xs font-light tracking-tight">Research</a>
+                    <div class="h-px bg-white/10 my-2"></div>
+                    <a href="privacy-policy.html" class="text-white text-xs font-light tracking-tight">Privacy Policy</a>
+                    <a href="terms-of-service.html" class="text-white text-xs font-light tracking-tight">Terms of Service</a>
+                    <a href="license.html" class="text-white text-xs font-light tracking-tight">License</a>
+                    <a href="contact.html" class="text-white text-xs font-light tracking-tight">Contact</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="container mx-auto px-4 h-full flex items-center">
+            <div class="hero-content max-w-4xl mx-auto py-20 md:py-32">
+                <span class="inline-block text-sm font-semibold text-white/80 uppercase tracking-wider mb-4">Next-gen pharmaceutical naming</span>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-tight">
+                    Revolutionizing <br/>Pharmaceutical Naming
+                </h1>
+                <p class="text-lg md:text-xl text-white/80 mb-10 max-w-2xl">
+                    Automated generation and validation of pharmaceutical names using AI and FDA algorithms for regulatory compliance
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#features" class="btn-primary glow">
+                        <span>Explore Features</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <a href="#demo" class="btn-secondary">
+                        <span>Watch Demo</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white flex flex-col items-center cursor-pointer animate-bounce" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">
+            <span class="text-sm mb-2">Scroll to explore</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+        </div>
+    </header>
+
+    <main>
+        <!-- Features Section -->
+        <section id="features" class="py-24 bg-white dark:bg-dark-light relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary/5 dark:from-transparent dark:to-primary/10 pointer-events-none"></div>
+            
+            <!-- Tech Grid Background -->
+            <div class="absolute inset-0 opacity-5 dark:opacity-10">
+                <div class="w-full h-full" style="background-image: radial-gradient(circle at 15px 15px, var(--primary) 2px, transparent 0); background-size: 30px 30px;"></div>
+            </div>
+            
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center mb-16">
+                    <span class="inline-block text-sm font-semibold text-primary uppercase tracking-wider mb-4">Advanced Technology</span>
+                    <h2 class="section-title">Powerful Features</h2>
+                    <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Our cutting-edge platform offers comprehensive tools for pharmaceutical naming</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-icon icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Name Comparison</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Advanced comparison engine using FDA's POCA algorithms for precise similarity analysis</p>
+                    </div>
+                    
+                    <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Name Generation</h3>
+                        <p class="text-gray-600 dark:text-gray-300">AI-powered name generation system creating unique, compliant pharmaceutical names</p>
+                    </div>
+                    
+                    <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="feature-icon icon-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Advanced AI</h3>
+                        <p class="text-gray-600 dark:text-gray-300">State-of-the-art artificial intelligence for optimal name selection and validation</p>
+                    </div>
+                    
+                    <div class="glass-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="feature-icon icon-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">POCA Algorithms</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Implements FDA's POCA algorithms for maximum regulatory compliance</p>
+                    </div>
+                    
+                    <div class="glass-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="feature-icon icon-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">EMA Database</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Comprehensive access to EMA's pharmaceutical name database</p>
+                    </div>
+                    
+                    <div class="glass-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="feature-icon icon-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Export Reports</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Generate and export detailed name viability reports for regulatory submission</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section id="demo" class="video-section py-24 relative">
+            <div class="video-bg-dots"></div>
+            
+            <!-- Tech wave background -->
+            <div class="absolute bottom-0 left-0 right-0 h-32 overflow-hidden opacity-20 pointer-events-none">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-full">
+                    <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="var(--primary)" opacity=".5"></path>
+                    <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="var(--primary)" opacity=".5"></path>
+                </svg>
+            </div>
+            
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center mb-16">
+                    <span class="inline-block text-sm font-semibold text-primary uppercase tracking-wider mb-4">Live Demo</span>
+                    <h2 class="section-title">See DrugFindr in Action</h2>
+                    <p class="text-gray-300 max-w-2xl mx-auto">Experience our revolutionary pharmaceutical naming technology through this comprehensive demonstration</p>
+                </div>
+                
+                <div class="max-w-4xl mx-auto video-container" data-aos="fade-up">
+                    <div class="aspect-w-16 aspect-h-9 relative">
+                        <!-- Overlay de reproducción grande y visible -->
+                        <div class="play-button-overlay" id="play-overlay">
+                            <div class="play-button-large">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                            </div>
+                            <span class="play-text">Haz clic para reproducir</span>
+                        </div>
+                        
+                        <!-- Este botón #play-btn ya está oculto por CSS arriba con display:none !important -->
+                        <div class="video-play" id="play-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <img src="https://i.ytimg.com/vi/cAYO7ys770Y/maxresdefault.jpg" alt="Video thumbnail" class="w-full h-full object-cover cursor-pointer" id="video-thumbnail">
+                        <div class="w-full h-full absolute inset-0 hidden" id="video-container">
+                            <iframe class="w-full h-full border-0" id="demo-video" src="" data-src="https://www.youtube.com/embed/cAYO7ys770Y?autoplay=1&rel=0&showinfo=0&modestbranding=1&playsinline=1&controls=1&fs=1&iv_load_policy=3" title="DrugFindr Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section id="impact" class="py-24 bg-white dark:bg-dark-light relative overflow-hidden">
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center mb-16">
+                    <span class="inline-block text-sm font-semibold text-primary uppercase tracking-wider mb-4">Impact</span>
+                    <h2 class="section-title">Our Impact</h2>
+                    <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">See how DrugFindr is transforming pharmaceutical naming across the industry</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="impact-icon icon-impact-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Increased Efficiency</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Significant reduction in time spent on name validation.</p>
+                    </div>
+                    
+                    <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="impact-icon icon-impact-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Higher Success Rate</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Improved likelihood of generated names passing regulatory review.</p>
+                    </div>
+                    
+                    <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="impact-icon icon-impact-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Cost Optimization</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Contributes to optimizing costs associated with regulatory submissions.</p>
+                    </div>
+                    
+                    <div class="glass-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="impact-icon icon-impact-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 016-6h6a6 6 0 016 6v1H9" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Continuous Innovation</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Driving innovation in the pharmaceutical name creation and validation process.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Section restaurada -->
+        <section id="research" class="py-24 animated-gradient text-white relative overflow-hidden">
+            <div class="absolute inset-0 pointer-events-none particles-container" id="particles-js"></div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-4xl mx-auto glass-card" data-aos="fade-up">
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="feature-icon md:w-20 md:h-20 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-semibold mb-4">Scientific Foundation</h3>
+                            <p class="mb-6 text-white/80">Dive into the research and methodology behind DrugFindr. Our scientific paper details the algorithms and processes that make this innovation possible.</p>
+                            <a href="https://1drv.ms/b/c/37a2e0d88f7a3ba9/Eb8Te2VF3tlFggjqasYy0AQBW_0P2eqzLpRZ5Bqr8KlICg?e=QqZ6Uc" 
+                               class="btn-primary"
+                               target="_blank">
+                                <span>Read Scientific Paper</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonios Carrusel -->
+        <section class="py-24 bg-white dark:bg-dark-light relative overflow-hidden">
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-4xl mx-auto glass-card" data-aos="fade-up">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <h2 class="text-3xl font-bold mb-6">Ready to transform your pharmaceutical naming?</h2>
+                        <p class="text-gray-600 dark:text-gray-300 mb-8">Experience the power of DrugFindr today and revolutionize your regulatory process</p>
+                        <a href="https://1drv.ms/u/c/37a2e0d88f7a3ba9/EWB1Zdw-O-tHjI2yhONk8GoBoL0GkuB9EJp9dxyO-7GPhQ?e=zIFzaK" class="btn-primary" target="_blank">
+                            Try DrugFindr Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-12 bg-dark-light text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5 pointer-events-none">
+            <div class="w-full h-full" style="background-image: linear-gradient(var(--primary) 1px, transparent 1px), linear-gradient(to right, var(--primary) 1px, transparent 1px); background-size: 20px 20px;"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-2 flex items-center">
+                        <span class="bg-white text-primary-dark rounded-lg w-8 h-8 flex items-center justify-center mr-2">D</span>
+                        DrugFindr
+                    </h3>
+                    <p>Revolutionizing pharmaceutical naming</p>
+                </div>
+                <div class="flex flex-col md:flex-row items-center gap-6">
+                    <a href="privacy-policy.html" class="transition-colors">Privacy Policy</a>
+                    <a href="terms-of-service.html" class="transition-colors">Terms of Service</a>
+                    <a href="license.html" class="transition-colors">License</a>
+                    <a href="contact.html" class="transition-colors">Contact</a>
+                </div>
+            </div>
+            <div class="border-t border-white/10 mt-8 pt-8 text-center">
+                <p>&copy; 2025 Isaac Sandiumenge - DrugFindr. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            
+            // Update toggle icon
+            const icon = themeToggle.querySelector('svg');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />';
+            } else {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />';
+            }
+        });
+        
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMenuButton = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuButton && mobileMenu && closeMenuButton) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('translate-x-full');
+            });
+            
+            closeMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.add('translate-x-full');
+            });
+            
+            // Close menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('translate-x-full');
+                });
+            });
+        }
+        
+        // Video player mejorado
+        const playBtn = document.getElementById('play-btn');
+        const videoThumbnail = document.getElementById('video-thumbnail');
+        const videoIframe = document.getElementById('demo-video');
+        const playOverlay = document.getElementById('play-overlay');
+        
+        function playVideo() {
+            const videoContainer = document.getElementById('video-container');
+            videoContainer.classList.remove('hidden');
+            videoIframe.src = videoIframe.getAttribute('data-src');
+            
+            videoThumbnail.classList.add('hidden');
+            if (playOverlay) {
+                playOverlay.classList.add('hidden');
+            }
+            
+            setTimeout(function() {
+                if (playOverlay) playOverlay.style.display = 'none';
+            }, 300);
+            
+            videoIframe.style.width = '100%';
+            videoIframe.style.height = '100%';
+            videoIframe.style.border = 'none';
+            videoIframe.style.margin = '0';
+            videoIframe.style.padding = '0';
+            videoIframe.style.overflow = 'hidden';
+            videoIframe.style.backgroundColor = '#000';
+            videoContainer.style.backgroundColor = '#000';
+        }
+        
+        if (playBtn) {
+            playBtn.addEventListener('click', playVideo);
+        }
+        
+        if (videoThumbnail) {
+            videoThumbnail.addEventListener('click', playVideo);
+        }
+        
+        if (playOverlay) {
+            playOverlay.addEventListener('click', playVideo);
+        }
+        
+        // Initialize particles.js
+        if (document.getElementById('particles-js')) {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ffffff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#ffffff",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": false,
+                            "mode": "repulse"
+                        },
+                        "onclick": {
+                            "enable": false,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    }
+                },
+                "retina_detect": true
+            });
+        }
+        
+        // Add float animation to CSS if not already present
+        if (!document.querySelector('style[data-float-animation]')) {
+            const style = document.createElement('style');
+            style.setAttribute('data-float-animation', 'true');
+            style.textContent = `
+                @keyframes float {
+                    0% { transform: translateY(0px) rotate(0deg); }
+                    50% { transform: translateY(-20px) rotate(5deg); }
+                    100% { transform: translateY(0px) rotate(0deg); }
+                }
+                
+                @media (prefers-reduced-motion: reduce) {
+                    .animate-bounce, [style*="animation:"], [style*="animation:"] * {
+                        animation: none !important;
+                        transition: none !important;
+                    }
+                }
+                
+                .bg-gradient-radial {
+                    background-image: radial-gradient(var(--primary-from, var(--primary-light)) 0%, var(--primary-to, transparent) 70%);
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Check for system dark mode preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark-mode');
+            if (themeToggle) {
+                const icon = themeToggle.querySelector('svg');
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />';
+            }
+        }
+        
+        // Listen for changes in color scheme
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (e.matches) {
+                document.body.classList.add('dark-mode');
+                if (themeToggle) {
+                    const icon = themeToggle.querySelector('svg');
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />';
+                }
+            } else {
+                document.body.classList.remove('dark-mode');
+                if (themeToggle) {
+                    const icon = themeToggle.querySelector('svg');
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />';
+                }
+            }
+        });
+
+        // Scrollspy para resaltar el enlace activo en el menú
+        const sections = ['features', 'demo', 'impact', 'research'];
+        const navLinks = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(id => {
+                const section = document.getElementById(id);
+                if (section) {
+                    const sectionTop = section.offsetTop - 120;
+                    if (window.scrollY >= sectionTop) {
+                        current = id;
+                    }
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
