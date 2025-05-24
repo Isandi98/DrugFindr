@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Legal Coder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --day-color: #FFB200;
+            --day-bg: #FFEDCB;
+            --night-color: #3B30DE;
+            --night-bg: #0A0B4A;
+            --text-light: #FFFFFF;
+            --text-dark: #222222;
+            --transition-time: 0.5s;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--day-bg), var(--night-bg));
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            padding: 1rem;
+        }
+        
+        .circle-container {
+            position: relative;
+            width: 60vmin;
+            height: 60vmin;
+            max-width: 400px;
+            max-height: 400px;
+            margin: 0 auto;
+        }
+        
+        .circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 35px rgba(0, 0, 0, 0.5);
+            animation: float 6s infinite alternate ease-in-out;
+            transition: transform 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(-7px); }
+            100% { transform: translateY(7px); }
+        }
+        
+        .circle:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+        
+        .day-half, .night-half {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            overflow: hidden;
+            transition: all 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        
+        .day-half {
+            left: 0;
+            border-radius: 30vmin 0 0 30vmin;
+            z-index: 2;
+        }
+        
+        .night-half {
+            right: 0;
+            border-radius: 0 30vmin 30vmin 0;
+            z-index: 1;
+        }
+
+        /* Comportamiento de hover */
+        .day-half:hover {
+            width: 100%;
+            border-radius: 30vmin;
+            z-index: 100;
+        }
+        
+        .night-half:hover {
+            width: 100%;
+            border-radius: 30vmin;
+            z-index: 100;
+        }
+
+        /* Cuando se hace hover en day-half, night-half se desvanece */
+        .day-half:hover ~ .night-half {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Cuando se hace hover en night-half, day-half se desvanece */
+        .night-half:hover ~ .day-half {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lawyer-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.85;
+            background-image: url('https://images.unsplash.com/photo-1589391886645-d51941baf7fb?q=80&w=1470');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.7) contrast(1.05) saturate(0.85);
+            z-index: 1;
+            transition: all 0.5s;
+        }
+
+        .day-half:hover .lawyer-background {
+                        opacity: 0.98;            filter: brightness(0.8) contrast(1.05) saturate(0.9);
+        }
+
+        .hacker-background {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.9;
+            background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1469');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            transition: all 0.5s ease;
+        }
+
+        .hacker-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg,
+                rgba(0, 0, 0, 0.85),
+                rgba(0, 0, 0, 0.7)
+            );
+            z-index: 2;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .hacker-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .night-half:hover .hacker-background {
+            opacity: 1;
+            transform: scale(1.02);
+        }
+
+        .night-half:hover .hacker-background::before {
+            opacity: 0.7;
+            background: linear-gradient(135deg,
+                rgba(0, 0, 0, 0.75),
+                rgba(0, 0, 0, 0.6)
+            );
+        }
+
+        .code-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            opacity: 0.15;
+            background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1470');
+            background-size: cover;
+            background-position: center;
+            mix-blend-mode: screen;
+            transition: opacity 0.5s ease;
+        }
+
+        .night-half:hover .code-overlay {
+            opacity: 0.25;
+        }
+
+        .night-half .content {
+            position: relative;
+            z-index: 101;
+            padding: 8% 4%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transform: translateY(7px);
+            opacity: 0.9;
+            transition: all 0.5s ease;
+        }
+
+        .night-half:hover .content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .night-half .title {
+            color: #fff;
+            text-shadow: 0 1px 7px rgba(0, 0, 0, 0.5);
+            font-size: clamp(1.3rem, 3.3vw, 3rem);
+        }
+
+        .night-half .dynamic-text {
+            color: #4AE3B5;
+            text-shadow: 0 1px 7px rgba(0, 0, 0, 0.5);
+            font-size: clamp(1rem, 2.3vw, 2rem);
+        }
+
+        .night-half .btn {
+            background: rgba(74, 227, 181, 0.2);
+            border: 2px solid #4AE3B5;
+            color: #4AE3B5;
+            transition: all 0.3s ease;
+        }
+
+        .night-half .btn:hover {
+            background: rgba(74, 227, 181, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(74, 227, 181, 0.2);
+        }
+
+        .day-half:hover .day-content {
+            opacity: 1;
+            animation: fadeInUp 0.7s;
+        }
+        .night-half:hover .night-content {
+            opacity: 1;
+            animation: fadeInUp 0.7s;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .day-half:hover .title, .night-half:hover .title {
+            transform: translateY(0);
+        }
+        .day-half:hover .subtitle {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .day-half:hover .btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .btn:hover {
+            background: rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px) scale(1.08);
+        }
+        /* Estrellas y matrix igual */
+        .stars-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 2s infinite alternate ease-in-out;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 0.9; transform: scale(1.2); }
+        }
+        
+        .matrix-column {
+            position: absolute;
+            top: -100%;
+            width: 20px;
+            font-family: monospace;
+            font-size: 14px;
+            color: #4AE3B5;
+            text-align: center;
+            animation-name: matrix-fall;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        
+        @keyframes matrix-fall {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        .night-content {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        .night-half .title,
+        .night-half .dynamic-text,
+        .night-half .btn {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+            font-weight: 700;
+        }
+
+        .day-half .title {
+            font-size: clamp(1.3rem, 3.3vw, 3rem);
+            margin-bottom: 0.7rem;
+            color: #1a1a1a;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            text-shadow: 1px 1px 7px rgba(0, 0, 0, 0.2),
+                        0 0 13px rgba(255, 255, 255, 0.4);
+        }
+
+        .day-half .dynamic-text {
+            font-size: clamp(1rem, 2.3vw, 2rem);
+            color: #2a2a2a;
+            font-weight: 700;
+            margin-top: 0.3rem;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2),
+                        0 0 10px rgba(255, 255, 255, 0.4);
+        }
+
+        .day-half .btn {
+            background: rgba(255, 255, 255, 0.25);
+            border: 2px solid #1a1a1a;
+            color: #1a1a1a;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .day-half .content {
+            position: relative;
+            z-index: 101;
+            padding: 8% 4%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transform: translateY(7px);
+            opacity: 0.95;
+            transition: all 0.5s ease;
+        }
+
+        .day-half:hover .content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .lawyer-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.2),
+                rgba(255, 255, 255, 0.1)
+            );
+            z-index: 2;
+            opacity: 0.7;
+            transition: opacity 0.5s ease;
+        }
+
+        .night-half .title {
+            font-size: clamp(1.3rem, 3.3vw, 3rem);
+            color: #fff;
+            text-shadow: 0 0 13px rgba(59, 48, 222, 0.8),
+                         0 0 27px rgba(59, 48, 222, 0.4);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+
+        .night-half .dynamic-text {
+            font-size: clamp(1rem, 2.3vw, 2rem);
+            color: #4AE3B5;
+            text-shadow: 0 0 10px rgba(74, 227, 181, 0.8),
+                         0 0 20px rgba(74, 227, 181, 0.4);
+            font-weight: 700;
+            margin-top: 0.3rem;
+        }
+
+        .btn {
+            margin-top: 1.3rem;
+            font-size: clamp(0.7rem, 1.3vw, 0.9rem);
+            padding: 0.67em 1.3em;
+            border-radius: 33px;
+            transition: all 0.3s ease;
+        }
+
+        .night-half .btn {
+            background: rgba(74, 227, 181, 0.1);
+            border: 2px solid #4AE3B5;
+            color: #4AE3B5;
+        }
+
+        .night-half .btn:hover {
+            background: rgba(74, 227, 181, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(74, 227, 181, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="circle-container">
+        <div class="circle">
+            <div class="divider"></div>
+            <a href="lawyer.html" class="day-half">
+                <div class="lawyer-background"></div>
+                <div class="content day-content">
+                    <h2 class="title">Lawyer</h2>
+                    <div class="dynamic-text lawyer-by-day">by day</div>
+                    <div class="btn">Ver más</div>
+                </div>
+            </a>
+            <a href="coder.html" class="night-half">
+                <div class="hacker-background">
+                    <div class="code-overlay"></div>
+                </div>
+                <div class="content night-content">
+                    <h2 class="title">Coder</h2>
+                    <div class="dynamic-text coder-by-night">by night</div>
+                    <div class="btn">Ver más</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Matriz de caracteres para la lluvia digital
+        class MatrixRain {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.characters = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン01";
+                this.fontSize = 10;
+                this.columns = 0;
+                this.drops = [];
+                
+                this.initialize();
+                window.addEventListener('resize', () => this.initialize());
+            }
+
+            initialize() {
+                this.canvas.width = this.canvas.offsetWidth;
+                this.canvas.height = this.canvas.offsetHeight;
+                this.columns = Math.floor(this.canvas.width / this.fontSize);
+                this.drops = [];
+                
+                for(let i = 0; i < this.columns; i++) {
+                    this.drops[i] = Math.random() * -100;
+                }
+            }
+
+            draw() {
+                this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.ctx.fillStyle = '#4AE3B5';
+                this.ctx.font = this.fontSize + 'px monospace';
+                
+                for(let i = 0; i < this.drops.length; i++) {
+                    const text = this.characters[Math.floor(Math.random() * this.characters.length)];
+                    this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
+                    
+                    if(this.drops[i] * this.fontSize > this.canvas.height && Math.random() > 0.975) {
+                        this.drops[i] = 0;
+                    }
+                    this.drops[i]++;
+                }
+            }
+
+            animate() {
+                this.draw();
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+
+        // Inicializar la lluvia de matriz
+        const matrixCanvas = document.querySelector('.matrix-rain');
+        if (matrixCanvas) {
+            const matrixRainInstance = new MatrixRain(matrixCanvas);
+            matrixRainInstance.animate();
+        }
+    </script>
+</body>
+</html> 
